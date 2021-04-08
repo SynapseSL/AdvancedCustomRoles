@@ -1,0 +1,86 @@
+## WARNING: The Inventory of this Role requires the MoreWeapons Plugin
+[MTFSniper]
+{
+name: MTFSniper
+roleID: 22
+teamID: 1
+enemies:
+- 0
+- 2
+- 3
+spawnrole: NtfCommander
+spawnHealth: 150
+maxHealth: 150
+displayInfo: <color=blue>MTFSniper</color>
+removeRoleName: true
+spawnMessageTime: 20
+spawnHint: '<i>You are a <color=blue>MTFSniper</color></i>'
+inventory:
+- iD: 8
+  durabillity: 0
+  sight: 0
+  barrel: 0
+  other: 0
+  xSize: 1
+  ySize: 1
+  zSize: 1
+- iD: 53
+  durabillity: 1
+  sight: 3
+  barrel: 4
+  other: 4
+  xSize: 1
+  ySize: 1
+  zSize: 1.5
+- iD: 21
+  durabillity: 50
+  sight: 0
+  barrel: 0
+  other: 0
+  xSize: 1
+  ySize: 1
+  zSize: 1
+- iD: 19
+  durabillity: 0
+  sight: 0
+  barrel: 0
+  other: 0
+  xSize: 1
+  ySize: 1
+  zSize: 1
+- iD: 25
+  durabillity: 0
+  sight: 0
+  barrel: 0
+  other: 0
+  xSize: 1
+  ySize: 1
+  zSize: 1
+- iD: 12
+  durabillity: 0
+  sight: 0
+  barrel: 0
+  other: 0
+  xSize: 1
+  ySize: 1
+  zSize: 1
+- iD: 27
+  durabillity: 0
+  sight: 0
+  barrel: 0
+  other: 0
+  xSize: 1
+  ySize: 1
+  zSize: 1
+- iD: 14
+  durabillity: 0
+  sight: 0
+  barrel: 0
+  other: 0
+  xSize: 1
+  ySize: 1
+  zSize: 1
+respawnReplace:
+  12: 10
+}
+

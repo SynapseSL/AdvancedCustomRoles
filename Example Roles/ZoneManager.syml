@@ -1,0 +1,58 @@
+[ZoneManager]
+{
+name: ZoneManager
+roleID: 20
+teamID: 1
+enemies:
+- 0
+- 2
+- 4
+spawnrole: FacilityGuard
+escapeRole: 13
+spawnHealth: 120
+maxHealth: 120
+displayInfo: <color=blue>ZoneManager</color>
+removeRoleName: true
+spawnMessageTime: 20
+spawnHint: '<i>You are a <color=blue>ZoneManager</color></i>\n<i>Help the Scientist to escape</i>'
+inventory:
+- iD: 3
+  durabillity: 0
+  sight: 0
+  barrel: 0
+  other: 0
+  xSize: 1
+  ySize: 1
+  zSize: 1
+- iD: 19
+  durabillity: 0
+  sight: 0
+  barrel: 0
+  other: 0
+  xSize: 1
+  ySize: 1
+  zSize: 1
+- iD: 14
+  durabillity: 0
+  sight: 0
+  barrel: 0
+  other: 0
+  xSize: 1
+  ySize: 1
+  zSize: 1
+ammo:
+  ammo5: 100
+  ammo7: 100
+  ammo9: 100
+spawns:
+- room: LCZ_ChkpA (21)
+  x: -3.88
+  y: 2.15
+  z: -7.53
+- room: LCZ_ChkpB (22)
+  x: -3.88
+  y: 2.15
+  z: -7.53
+roundStartReplace:
+  15: 10
+}

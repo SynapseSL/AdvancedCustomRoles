@@ -1,0 +1,91 @@
+## WARNING: The Inventory of this Role requires the MoreWeapons Plugin
+[MTFMedik]
+{
+name: MTFMedik
+roleID: 23
+teamID: 1
+enemies:
+- 0
+- 2
+- 3
+spawnrole: FacilityGuard
+spawnHealth: 115
+maxHealth: 115
+displayInfo: MTFMedik
+removeRoleName: true
+spawnMessageTime: 20
+spawnHint: '<i>You are a Medik</i>'
+inventory:
+- iD: 7
+  durabillity: 0
+  sight: 0
+  barrel: 0
+  other: 0
+  xSize: 1
+  ySize: 1
+  zSize: 1
+- iD: 58
+  durabillity: 5
+  sight: 0
+  barrel: 0
+  other: 0
+  xSize: 1
+  ySize: 1
+  zSize: 1
+- iD: 21
+  durabillity: 50
+  sight: 0
+  barrel: 0
+  other: 0
+  xSize: 1
+  ySize: 1
+  zSize: 1
+- iD: 14
+  durabillity: 0
+  sight: 0
+  barrel: 0
+  other: 0
+  xSize: 1
+  ySize: 1
+  zSize: 1
+- iD: 14
+  durabillity: 0
+  sight: 0
+  barrel: 0
+  other: 0
+  xSize: 1
+  ySize: 1
+  zSize: 1
+- iD: 14
+  durabillity: 0
+  sight: 0
+  barrel: 0
+  other: 0
+  xSize: 1
+  ySize: 1
+  zSize: 1
+- iD: 33
+  durabillity: 0
+  sight: 0
+  barrel: 0
+  other: 0
+  xSize: 1
+  ySize: 1
+  zSize: 1
+- iD: 33
+  durabillity: 0
+  sight: 0
+  barrel: 0
+  other: 0
+  xSize: 1
+  ySize: 1
+  zSize: 1
+spawns:
+- room: Root_*&*Outside Cams
+  x: 180.6
+  y: -5.4
+  z: -54.6
+respawnReplace:
+  11: 20
+}
+

@@ -1,0 +1,76 @@
+[ChaosSpy]
+{
+name: ChaosSpy
+roleID: 24
+teamID: 2
+enemies:
+- 1
+- 3
+friends:
+- 2
+- 4
+spawnrole: NtfLieutenant
+spawnHealth: 120
+maxHealth: 120
+spawnMessageTime: 20
+spawnHint: '<i>You are a <color=green>Chaos Spy</color>.</i>\n<i>Try to kill as many MTF without that they notice that you are a spy!</i>'
+inventory:
+- iD: 7
+  durabillity: 0
+  sight: 0
+  barrel: 0
+  other: 0
+  xSize: 1
+  ySize: 1
+  zSize: 1
+- iD: 20
+  durabillity: 40
+  sight: 0
+  barrel: 0
+  other: 0
+  xSize: 1
+  ySize: 1
+  zSize: 1
+- iD: 19
+  durabillity: 0
+  sight: 0
+  barrel: 0
+  other: 0
+  xSize: 1
+  ySize: 1
+  zSize: 1
+- iD: 25
+  durabillity: 0
+  sight: 0
+  barrel: 0
+  other: 0
+  xSize: 1
+  ySize: 1
+  zSize: 1
+- iD: 12
+  durabillity: 0
+  sight: 0
+  barrel: 0
+  other: 0
+  xSize: 1
+  ySize: 1
+  zSize: 1
+- iD: 27
+  durabillity: 0
+  sight: 0
+  barrel: 0
+  other: 0
+  xSize: 1
+  ySize: 1
+  zSize: 1
+- iD: 14
+  durabillity: 0
+  sight: 0
+  barrel: 0
+  other: 0
+  xSize: 1
+  ySize: 1
+  zSize: 1
+respawnReplace:
+  12: 100
+}
