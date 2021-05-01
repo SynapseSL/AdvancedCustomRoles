@@ -39,7 +39,6 @@ namespace AdvancedCustomRoles.Handlers
             var role = Plugin.RoleHandler.CustomRoles.FirstOrDefault(x => x.RoleID == id);
             if (role != null)
             {
-                ev.Items = role.Inventory.Select(x => x.Parse()).ToList();
                 if(role.Spawns.Count > 0)
                     ev.Position = role.Spawns.ElementAt(UnityEngine.Random.Range(0, role.Spawns.Count)).Parse().Position;
             }

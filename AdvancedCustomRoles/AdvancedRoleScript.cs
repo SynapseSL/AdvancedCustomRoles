@@ -23,16 +23,12 @@ namespace AdvancedCustomRoles
 
         public override int GetTeamID() => CustomRole != null ? CustomRole.TeamID : 0;
 
-        public override int GetEscapeRole() => CustomRole.EscapeRole;
-
         public override void Spawn()
         {
             Player.RoleType = CustomRole.Spawnrole;
             Player.MaxHealth = CustomRole.MaxHealth;
             Player.Health = CustomRole.SpawnHealth;
-            Player.Ammo5 = CustomRole.Ammo.Ammo5;
-            Player.Ammo7 = CustomRole.Ammo.Ammo7;
-            Player.Ammo9 = CustomRole.Ammo.Ammo9;
+            CustomRole.Inventory.Apply(Player);
 
             if (!string.IsNullOrWhiteSpace(CustomRole.DisplayInfo))
                 Player.DisplayInfo = CustomRole.DisplayInfo.Replace("\\n","\n");

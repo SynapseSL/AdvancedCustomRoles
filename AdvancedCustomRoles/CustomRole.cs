@@ -36,9 +36,7 @@ namespace AdvancedCustomRoles
 
         public string SpawnWindow { get; set; } = "";
 
-        public List<SerializedItem> Inventory { get; set; } = new List<SerializedItem>();
-
-        public Ammo Ammo { get; set; } = new Ammo();
+        public SerializedPlayerInventory Inventory = new SerializedPlayerInventory();
 
         public List<SerializedMapPoint> Spawns { get; set; } = new List<SerializedMapPoint>();
 
@@ -51,12 +49,5 @@ namespace AdvancedCustomRoles
         public int MaxRespawnAmount { get; set; } = -1;
 
         public int MaxAmount { get; set; } = -1;
-    }
-
-    public class Ammo
-    {
-        public uint Ammo5 { get; set; } = 0;
-        public uint Ammo7 { get; set; } = 0;
-        public uint Ammo9 { get; set; } = 0;
     }
 }

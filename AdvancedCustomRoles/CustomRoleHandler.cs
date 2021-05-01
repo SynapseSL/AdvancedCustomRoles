@@ -71,7 +71,19 @@ namespace AdvancedCustomRoles
                 DisplayInfo = "<color=green>Example</color>",
                 Enemies = new List<int> { 0 },
                 Friends = new List<int> { 0 },
-                Inventory = new List<SerializedItem> { new SerializedItem(24, 70f, 0, 0, 0, new UnityEngine.Vector3(1, 1, 1)) },
+                Inventory = new SerializedPlayerInventory
+                {
+                    Ammo = new SerializedAmmo
+                    {
+                        Ammo5 = 50,
+                        Ammo7 = 50,
+                        Ammo9 = 50,
+                    },
+                    Items = new List<SerializedPlayerItem>
+                    {
+                        new SerializedPlayerItem(0,0f,0,0,0,UnityEngine.Vector3.one,100,false)
+                    }
+                },
                 RemoveRoleName = true,
                 RoleID = 25,
                 Spawns = new List<SerializedMapPoint> { new SerializedMapPoint("EZ_Shelter", 0f, 2f, 0f), new SerializedMapPoint("EZ_Shelter", 2f, 2f, 0f) },
