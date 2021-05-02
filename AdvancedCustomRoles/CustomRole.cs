@@ -1,6 +1,5 @@
 ﻿using Synapse.Config;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace AdvancedCustomRoles
 {

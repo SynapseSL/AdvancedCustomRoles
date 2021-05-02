@@ -47,7 +47,8 @@ namespace AdvancedCustomRoles
 
         public override void Escape()
         {
-            Player.RoleID = CustomRole.EscapeRole;
+            if (CustomRole.EscapeRole > 0)
+                Player.RoleID = CustomRole.EscapeRole;
         }
 
         public override void DeSpawn()
