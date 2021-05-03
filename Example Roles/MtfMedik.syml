@@ -16,70 +16,91 @@ removeRoleName: true
 spawnMessageTime: 20
 spawnHint: '<i>You are a Medik</i>'
 inventory:
-- iD: 7
-  durabillity: 0
-  sight: 0
-  barrel: 0
-  other: 0
-  xSize: 1
-  ySize: 1
-  zSize: 1
-- iD: 58
-  durabillity: 5
-  sight: 0
-  barrel: 0
-  other: 0
-  xSize: 1
-  ySize: 1
-  zSize: 1
-- iD: 21
-  durabillity: 50
-  sight: 0
-  barrel: 0
-  other: 0
-  xSize: 1
-  ySize: 1
-  zSize: 1
-- iD: 14
-  durabillity: 0
-  sight: 0
-  barrel: 0
-  other: 0
-  xSize: 1
-  ySize: 1
-  zSize: 1
-- iD: 14
-  durabillity: 0
-  sight: 0
-  barrel: 0
-  other: 0
-  xSize: 1
-  ySize: 1
-  zSize: 1
-- iD: 14
-  durabillity: 0
-  sight: 0
-  barrel: 0
-  other: 0
-  xSize: 1
-  ySize: 1
-  zSize: 1
-- iD: 33
-  durabillity: 0
-  sight: 0
-  barrel: 0
-  other: 0
-  xSize: 1
-  ySize: 1
-  zSize: 1
-- iD: 33
-  durabillity: 0
-  sight: 0
-  barrel: 0
-  other: 0
-  xSize: 1
-  ySize: 1
-  zSize: 1
+  items:
+  - chance: 100
+    usePreferences: false
+    iD: 7
+    durabillity: 0
+    sight: 0
+    barrel: 0
+    other: 0
+    xSize: 1
+    ySize: 1
+    zSize: 1
+  - chance: 100
+    usePreferences: false
+    iD: 58
+    durabillity: 3
+    sight: 0
+    barrel: 0
+    other: 0
+    xSize: 1
+    ySize: 1
+    zSize: 1
+  - chance: 100
+    usePreferences: true
+    iD: 21
+    durabillity: 50
+    sight: 0
+    barrel: 0
+    other: 0
+    xSize: 1
+    ySize: 1
+    zSize: 1
+  - chance: 100
+    usePreferences: false
+    iD: 14
+    durabillity: 0
+    sight: 0
+    barrel: 0
+    other: 0
+    xSize: 1
+    ySize: 1
+    zSize: 1
+  - chance: 100
+    usePreferences: false
+    iD: 14
+    durabillity: 0
+    sight: 0
+    barrel: 0
+    other: 0
+    xSize: 1
+    ySize: 1
+    zSize: 1
+  - chance: 100
+    usePreferences: false
+    iD: 14
+    durabillity: 0
+    sight: 0
+    barrel: 0
+    other: 0
+    xSize: 1
+    ySize: 1
+    zSize: 1
+  - chance: 100
+    usePreferences: false
+    iD: 33
+    durabillity: 0
+    sight: 0
+    barrel: 0
+    other: 0
+    xSize: 1
+    ySize: 1
+    zSize: 1
+  - chance: 100
+    usePreferences: false
+    iD: 33
+    durabillity: 0
+    sight: 0
+    barrel: 0
+    other: 0
+    xSize: 1
+    ySize: 1
+    zSize: 1
+  ammo:
+    ammo5: 50
+    ammo7: 50
+    ammo9: 50
 spawns:
 - room: Root_*&*Outside Cams
   x: 180.6

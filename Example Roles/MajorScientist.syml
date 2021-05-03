@@ -16,30 +16,41 @@ removeRoleName: true
 spawnMessageTime: 20
 spawnHint: <i>You are a <color=orange>Major-Scientist</color></i>\n<i>You have a MajorScientist Keycard and more Health</i>
 inventory:
-- iD: 2
-  durabillity: 0
-  sight: 0
-  barrel: 0
-  other: 0
-  xSize: 1
-  ySize: 1
-  zSize: 1
-- iD: 14
-  durabillity: 0
-  sight: 0
-  barrel: 0
-  other: 0
-  xSize: 1
-  ySize: 1
-  zSize: 1
-- iD: 34
-  durabillity: 0
-  sight: 0
-  barrel: 0
-  other: 0
-  xSize: 1
-  ySize: 1
-  zSize: 1
+  items:
+  - chance: 100
+    usePreferences: false
+    iD: 2
+    durabillity: 0
+    sight: 0
+    barrel: 0
+    other: 0
+    xSize: 1
+    ySize: 1
+    zSize: 1
+  - chance: 100
+    usePreferences: false
+    iD: 14
+    durabillity: 0
+    sight: 0
+    barrel: 0
+    other: 0
+    xSize: 1
+    ySize: 1
+    zSize: 1
+  - chance: 100
+    usePreferences: false
+    iD: 34
+    durabillity: 0
+    sight: 0
+    barrel: 0
+    other: 0
+    xSize: 1
+    ySize: 1
+    zSize: 1
+  ammo:
+    ammo5: 0
+    ammo7: 0
+    ammo9: 0
 roundStartReplace:
   6: 20
 }

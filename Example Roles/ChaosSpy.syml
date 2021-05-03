@@ -13,64 +13,83 @@ spawnrole: NtfLieutenant
 spawnHealth: 120
 maxHealth: 120
 spawnMessageTime: 20
-spawnHint: '<i>You are a <color=green>Chaos Spy</color>.</i>\n<i>Try to kill as many MTF without that they notice that you are a spy!</i>'
+spawnWindow: '<i>You are a <color=green>Chaos Spy</color>.</i>\n<i>Try to kill as many MTF without that they notice that you are a spy!</i>\n<size=20>Press esc to close</size>'
 inventory:
-- iD: 7
-  durabillity: 0
-  sight: 0
-  barrel: 0
-  other: 0
-  xSize: 1
-  ySize: 1
-  zSize: 1
-- iD: 20
-  durabillity: 40
-  sight: 0
-  barrel: 0
-  other: 0
-  xSize: 1
-  ySize: 1
-  zSize: 1
-- iD: 19
-  durabillity: 0
-  sight: 0
-  barrel: 0
-  other: 0
-  xSize: 1
-  ySize: 1
-  zSize: 1
-- iD: 25
-  durabillity: 0
-  sight: 0
-  barrel: 0
-  other: 0
-  xSize: 1
-  ySize: 1
-  zSize: 1
-- iD: 12
-  durabillity: 0
-  sight: 0
-  barrel: 0
-  other: 0
-  xSize: 1
-  ySize: 1
-  zSize: 1
-- iD: 27
-  durabillity: 0
-  sight: 0
-  barrel: 0
-  other: 0
-  xSize: 1
-  ySize: 1
-  zSize: 1
-- iD: 14
-  durabillity: 0
-  sight: 0
-  barrel: 0
-  other: 0
-  xSize: 1
-  ySize: 1
-  zSize: 1
+  items:
+  - chance: 100
+    usePreferences: false
+    iD: 7
+    durabillity: 0
+    sight: 0
+    barrel: 0
+    other: 0
+    xSize: 1
+    ySize: 1
+    zSize: 1
+  - chance: 100
+    usePreferences: true
+    iD: 20
+    durabillity: 40
+    sight: 0
+    barrel: 0
+    other: 0
+    xSize: 1
+    ySize: 1
+    zSize: 1
+  - chance: 100
+    usePreferences: false
+    iD: 19
+    durabillity: 0
+    sight: 0
+    barrel: 0
+    other: 0
+    xSize: 1
+    ySize: 1
+    zSize: 1
+  - chance: 100
+    usePreferences: false
+    iD: 25
+    durabillity: 0
+    sight: 0
+    barrel: 0
+    other: 0
+    xSize: 1
+    ySize: 1
+    zSize: 1
+  - chance: 100
+    usePreferences: false
+    iD: 12
+    durabillity: 0
+    sight: 0
+    barrel: 0
+    other: 0
+    xSize: 1
+    ySize: 1
+    zSize: 1
+  - chance: 100
+    usePreferences: false
+    iD: 27
+    durabillity: 0
+    sight: 0
+    barrel: 0
+    other: 0
+    xSize: 1
+    ySize: 1
+    zSize: 1
+  - chance: 100
+    usePreferences: false
+    iD: 14
+    durabillity: 0
+    sight: 0
+    barrel: 0
+    other: 0
+    xSize: 1
+    ySize: 1
+    zSize: 1
+  ammo:
+    ammo5: 75
+    ammo7: 75
+    ammo9: 75
 respawnReplace:
   12: 100
 }
