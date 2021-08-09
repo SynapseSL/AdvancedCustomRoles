@@ -19,7 +19,7 @@ namespace AdvancedCustomRoles
 
         public int EscapeRole { get; set; } = -1;
         
-        public bool Godmode { get; set; } = false;
+        public bool GodMode { get; set; } = false;
 
         public float SpawnHealth { get; set; } = 100f;
 
