@@ -18,6 +18,8 @@ namespace AdvancedCustomRoles
         public RoleType Spawnrole { get; set; } = RoleType.ClassD;
 
         public int EscapeRole { get; set; } = -1;
+        
+        public bool GodMode { get; set; } = false;
 
         public float SpawnHealth { get; set; } = 100f;
 
