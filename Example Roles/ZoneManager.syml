@@ -1,7 +1,7 @@
 [ZoneManager]
 {
 name: ZoneManager
-roleID: 20
+roleID: 25
 teamID: 1
 enemies:
 - 0
@@ -21,9 +21,7 @@ inventory:
     usePreferences: false
     iD: 3
     durabillity: 0
-    sight: 0
-    barrel: 0
-    other: 0
+    weaponAttachments: 0
     xSize: 1
     ySize: 1
     zSize: 1
@@ -31,9 +29,7 @@ inventory:
     usePreferences: false
     iD: 19
     durabillity: 0
-    sight: 0
-    barrel: 0
-    other: 0
+    weaponAttachments: 0
     xSize: 1
     ySize: 1
     zSize: 1
@@ -41,9 +37,7 @@ inventory:
     usePreferences: false
     iD: 14
     durabillity: 0
-    sight: 0
-    barrel: 0
-    other: 0
+    weaponAttachments: 0
     xSize: 1
     ySize: 1
     zSize: 1
@@ -51,6 +45,8 @@ inventory:
     ammo5: 100
     ammo7: 100
     ammo9: 100
+    ammo12: 100
+    ammo44: 100
 spawns:
 - room: LCZ_ChkpA (21)
   x: -3.88
