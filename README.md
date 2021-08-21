@@ -22,19 +22,14 @@ If you need more Examples you can see some Example Roles [here](https://github.c
 ```yml
 inventory:
   items:
-  # The chance that the player will get the item
+    # The chance that the player gets the Items
   - chance: 100
-    #If the preferred attachement should be used (most usefull for weapons)
+    # If the prefered weapon attachments should be used
     usePreferences: false
-    # The ID of the Item (see https://docs.synapsesl.xyz/resources#items)
+    # The Id of the Item
     iD: 0
-    # The Durabillity of the Item which can be Ammo in the weapon, battery of the radio or nothing for the medkit
     durabillity: 0
-    # The Attachement of the Items. Only used for weapons
-    sight: 0
-    barrel: 0
-    other: 0
-    # The Size of the Item when dropped
+    weaponAttachments: 0
     xSize: 1
     ySize: 1
     zSize: 1
@@ -42,6 +37,8 @@ inventory:
     ammo5: 50
     ammo7: 50
     ammo9: 50
+    ammo12: 0
+    ammo44: 0
 ```
 
 ### Role Information
