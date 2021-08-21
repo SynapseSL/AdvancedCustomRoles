@@ -11,7 +11,7 @@ namespace AdvancedCustomRoles
         SynapseMajor = 2,
         SynapseMinor = 5,
         SynapsePatch = 3,
-        Version = "v.1.0.0"
+        Version = "v.1.0.1"
         )]
     public class PluginClass : AbstractPlugin
     {

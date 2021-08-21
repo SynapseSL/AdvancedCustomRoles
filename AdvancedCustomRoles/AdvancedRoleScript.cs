@@ -28,7 +28,8 @@ namespace AdvancedCustomRoles
             Player.RoleType = CustomRole.Spawnrole;
             Player.MaxHealth = CustomRole.MaxHealth;
             Player.Health = CustomRole.SpawnHealth;
-            Player.GodMode = CustomRole.GodMode;
+            if (CustomRole.GodMode)
+                Player.GodMode = true;
             CustomRole.Inventory.Apply(Player);
 
             if (!string.IsNullOrWhiteSpace(CustomRole.DisplayInfo))

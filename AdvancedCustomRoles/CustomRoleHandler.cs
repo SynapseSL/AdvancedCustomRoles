@@ -5,6 +5,7 @@ using Synapse.Api;
 using Synapse.Config;
 using System.IO;
 using Synapse.Api.Roles;
+using System;
 
 namespace AdvancedCustomRoles
 {
@@ -37,22 +38,29 @@ namespace AdvancedCustomRoles
 
             foreach(var file in files)
             {
-                var syml = new SYML(file);
-                syml.Load();
-                if(syml.Sections.Count == 0)
+                try
                 {
-                    Logger.Get.Warn($"[AdvancedCustomRoles] No Section found in {file}");
-                    continue;
+                    var syml = new SYML(file);
+                    syml.Load();
+                    if (syml.Sections.Count == 0)
+                    {
+                        Logger.Get.Warn($"[AdvancedCustomRoles] No Section found in {file}");
+                        continue;
+                    }
+                    var section = syml.Sections.FirstOrDefault().Value;
+                    var role = section.LoadAs<CustomRole>();
+                    if (Server.Get.RoleManager.IsIDRegistered(role.RoleID))
+                    {
+                        Logger.Get.Warn($"[AdvancedCustomRoles] CustomRole: {role.Name} is invalid since it ID is already registered please use a different one");
+                        continue;
+                    }
+                    CustomRoles.Add(role);
+                    Server.Get.RoleManager.RegisterCustomRole(new RoleInformation(role.Name, role.RoleID, typeof(AdvancedRoleScript)));
                 }
-                var section = syml.Sections.FirstOrDefault().Value;
-                var role = section.LoadAs<CustomRole>();
-                if (Server.Get.RoleManager.IsIDRegistered(role.RoleID))
+                catch(Exception e)
                 {
-                    Logger.Get.Warn($"[AdvancedCustomRoles] CustomRole: {role.Name} is invalid since it ID is already registered please use a different one");
-                    continue;
+                    Logger.Get.Error($"Error while loading CustomRole: {file}\n\n{e}");
                 }
-                CustomRoles.Add(role);
-                Server.Get.RoleManager.RegisterCustomRole(new RoleInformation(role.Name, role.RoleID, typeof(AdvancedRoleScript)));
             }
         }
 
@@ -81,7 +89,7 @@ namespace AdvancedCustomRoles
                     },
                     Items = new List<SerializedPlayerItem>
                     {
-                        new SerializedPlayerItem(0,0f,0,0,0,UnityEngine.Vector3.one,100,false)
+                        new SerializedPlayerItem(0, 0, 0, UnityEngine.Vector3.one, 100, false)
                     }
                 },
                 RemoveRoleName = true,
