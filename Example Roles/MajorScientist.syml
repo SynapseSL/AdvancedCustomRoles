@@ -21,9 +21,7 @@ inventory:
     usePreferences: false
     iD: 2
     durabillity: 0
-    sight: 0
-    barrel: 0
-    other: 0
+    weaponAttachments: 0
     xSize: 1
     ySize: 1
     zSize: 1
@@ -31,9 +29,7 @@ inventory:
     usePreferences: false
     iD: 14
     durabillity: 0
-    sight: 0
-    barrel: 0
-    other: 0
+    weaponAttachments: 0
     xSize: 1
     ySize: 1
     zSize: 1
@@ -41,17 +37,10 @@ inventory:
     usePreferences: false
     iD: 34
     durabillity: 0
-    sight: 0
-    barrel: 0
-    other: 0
+    weaponAttachments: 0
     xSize: 1
     ySize: 1
     zSize: 1
-  ammo:
-    ammo5: 0
-    ammo7: 0
-    ammo9: 0
 roundStartReplace:
   6: 20
 }
-
