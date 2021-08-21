@@ -9,7 +9,7 @@ enemies:
 friends:
 - 2
 - 4
-spawnrole: NtfLieutenant
+spawnrole: NtfPrivate
 spawnHealth: 120
 maxHealth: 120
 spawnMessageTime: 20
@@ -20,9 +20,7 @@ inventory:
     usePreferences: false
     iD: 7
     durabillity: 0
-    sight: 0
-    barrel: 0
-    other: 0
+    weaponAttachments: 0
     xSize: 1
     ySize: 1
     zSize: 1
@@ -30,9 +28,7 @@ inventory:
     usePreferences: true
     iD: 20
     durabillity: 40
-    sight: 0
-    barrel: 0
-    other: 0
+    weaponAttachments: 0
     xSize: 1
     ySize: 1
     zSize: 1
@@ -40,9 +36,7 @@ inventory:
     usePreferences: false
     iD: 19
     durabillity: 0
-    sight: 0
-    barrel: 0
-    other: 0
+    weaponAttachments: 0
     xSize: 1
     ySize: 1
     zSize: 1
@@ -50,9 +44,7 @@ inventory:
     usePreferences: false
     iD: 25
     durabillity: 0
-    sight: 0
-    barrel: 0
-    other: 0
+    weaponAttachments: 0
     xSize: 1
     ySize: 1
     zSize: 1
@@ -60,9 +52,7 @@ inventory:
     usePreferences: false
     iD: 12
     durabillity: 0
-    sight: 0
-    barrel: 0
-    other: 0
+    weaponAttachments: 0
     xSize: 1
     ySize: 1
     zSize: 1
@@ -70,9 +60,7 @@ inventory:
     usePreferences: false
     iD: 27
     durabillity: 0
-    sight: 0
-    barrel: 0
-    other: 0
+    weaponAttachments: 0
     xSize: 1
     ySize: 1
     zSize: 1
@@ -80,9 +68,7 @@ inventory:
     usePreferences: false
     iD: 14
     durabillity: 0
-    sight: 0
-    barrel: 0
-    other: 0
+    weaponAttachments: 0
     xSize: 1
     ySize: 1
     zSize: 1
@@ -90,6 +76,8 @@ inventory:
     ammo5: 75
     ammo7: 75
     ammo9: 75
+    ammo12: 75
+    ammo44: 75
 respawnReplace:
   12: 100
 }
