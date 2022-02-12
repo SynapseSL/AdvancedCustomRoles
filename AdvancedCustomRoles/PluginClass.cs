@@ -9,9 +9,9 @@ namespace AdvancedCustomRoles
         Description = "A Plugin for creating new Roles without c# knowledge",
         LoadPriority = 100,
         SynapseMajor = 2,
-        SynapseMinor = 5,
+        SynapseMinor = 8,
         SynapsePatch = 3,
-        Version = "v.1.0.1"
+        Version = "v.1.0.2"
         )]
     public class PluginClass : AbstractPlugin
     {
