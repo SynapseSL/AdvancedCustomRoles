@@ -1,53 +1,52 @@
-﻿using Synapse;
-using Synapse.Api;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using MEC;
+using Synapse3.SynapseModule.Events;
+using Synapse3.SynapseModule.Player;
+using UnityEngine;
 
-namespace AdvancedCustomRoles.Handlers
+namespace AdvancedCustomRoles.Handlers;
+
+public class RoundHandler
 {
-    public class RoundHandler
+    private readonly AdvancedCustomRoles _plugin;
+
+    public RoundHandler(AdvancedCustomRoles plugin, RoundEvents roundEvents)
     {
-        public PluginClass PluginClass { get; set; }
+        _plugin = plugin;
 
-        public List<Player> RespawnPlayers { get; set; } = new List<Player>();
+        roundEvents.FirstSpawn.Subscribe(FirstSpawn);
+        roundEvents.SpawnTeam.Subscribe(Respawn);
+    }
 
-        public List<int> SpawnedRoles { get; set; } = new List<int>();
+    public List<SynapsePlayer> RespawnPlayers { get; private set; } = new();
+    public List<uint> SpawnedRoles { get; } = new();
 
-        public RoundHandler(PluginClass plugin)
+    private void Respawn(SpawnTeamEvent ev)
+    {
+        RespawnPlayers = ev.Players.ToList();
+        Timing.CallDelayed(0.3f, () =>
         {
-            PluginClass = plugin;
+            RespawnPlayers.Clear();
+            SpawnedRoles.Clear();
+        });
+    }
 
-            Server.Get.Events.Round.SpawnPlayersEvent += SpawnPlayers;
-            Server.Get.Events.Round.TeamRespawnEvent += Respawn;
-        }
+    private void FirstSpawn(FirstSpawnEvent ev)
+    {
+        var list = new List<uint>();
 
-        private void Respawn(Synapse.Api.Events.SynapseEventArguments.TeamRespawnEventArgs ev)
+        foreach (var role in _plugin.RoleHandler.CustomRoles)
         {
-            RespawnPlayers = ev.Players;
-            MEC.Timing.CallDelayed(0.3f, () =>
+            foreach (var spawn in ev.PlayerAndRoles.Where(x => role.RoundStartReplace.Keys.Contains(x.Value)).ToList())
             {
-                RespawnPlayers.Clear();
-                SpawnedRoles.Clear();
-            });
-        }
+                //Before this Event it should be impossible to become and keep another Custom Role so we don't have to check the Amount of players with the Role currently
+                if (role.MaxAmount >= 0 && list.Count(x => x == role.RoleId) >= role.MaxSpawnAmount) continue;
+                if (role.MaxSpawnAmount >= 0 && list.Count(x => x == role.RoleId) >= role.MaxSpawnAmount) continue;
 
-        private void SpawnPlayers(Synapse.Api.Events.SynapseEventArguments.SpawnPlayersEventArgs ev)
-        {
-            var list = new List<int>();
-
-            foreach(var role in PluginClass.RoleHandler.CustomRoles)
-            {
-                foreach (var spawn in ev.SpawnPlayers.Where(x => role.RoundStartReplace.Keys.Contains(x.Value)).ToList())
-                {
-                    if (role.MaxAmount >= 0 && list.Where(x => x == role.RoleID).Count() >= role.MaxSpawnAmount) continue;
-                    if (role.MaxSpawnAmount >= 0 && list.Where(x => x == role.RoleID).Count() >= role.MaxSpawnAmount) continue;
-
-                    if (UnityEngine.Random.Range(1f,100f) <= role.RoundStartReplace.FirstOrDefault(x => x.Key == spawn.Value).Value)
-                    {
-                        ev.SpawnPlayers[spawn.Key] = role.RoleID;
-                        list.Add(role.RoleID);
-                    }
-                }
+                if (Random.Range(1f, 100f) > role.RoundStartReplace[spawn.Value]) continue;
+                ev.PlayerAndRoles[spawn.Key] = role.RoleId;
+                list.Add(role.RoleId);
             }
         }
     }

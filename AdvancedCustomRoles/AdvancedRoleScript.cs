@@ -1,66 +1,89 @@
-﻿using Synapse.Api;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Neuron.Core.Logging;
+using Synapse3.SynapseModule;
+using Synapse3.SynapseModule.Map;
+using Synapse3.SynapseModule.Player;
+using Synapse3.SynapseModule.Role;
 
-namespace AdvancedCustomRoles
+namespace AdvancedCustomRoles;
+public class AdvancedRoleScript : SynapseAbstractRole
 {
-    public class AdvancedRoleScript : Synapse.Api.Roles.Role
+    public CustomRole RoleConfig;
+    private CustomInfoList.CustomInfoEntry _customInfo;
+    private readonly CustomRoleHandler _roleHandler;
+    private readonly MapService _map;
+    private readonly PlayerService _player;
+
+    public AdvancedRoleScript(CustomRoleHandler roleHandler, MapService map, PlayerService player)
     {
-        public static PluginClass Plugin { private get; set; }
+        _roleHandler = roleHandler;
+        _map = map;
+        _player = player;
+    }
+        
+    public override void Load()
+    {
+        RoleConfig = _roleHandler.GetCustomRole(Attribute.Id);
+    }
 
-        public AdvancedRoleScript(CustomRole role) => CustomRole = role;
-
-        public AdvancedRoleScript(int id) => CustomRole = Plugin.RoleHandler.GetCustomRole(id);
-
-        public CustomRole CustomRole { get; }
-
-        public override int GetRoleID() => CustomRole.RoleID;
-
-        public override string GetRoleName() => CustomRole != null ? CustomRole.Name : "NULL";
-
-        public override List<int> GetEnemiesID() => CustomRole != null ? CustomRole.Enemies : new List<int>();
-
-        public override List<int> GetFriendsID() => CustomRole != null ? CustomRole.Friends : new List<int>();
-
-        public override int GetTeamID() => CustomRole != null ? CustomRole.TeamID : 0;
-
-        public override void Spawn()
+    protected override IAbstractRoleConfig GetConfig() => RoleConfig;
+    public override List<uint> GetEnemiesID() => RoleConfig.Enemies;
+    public override List<uint> GetFriendsID() => RoleConfig.Friends;
+        
+    protected override void OnSpawn(IAbstractRoleConfig _)
+    {
+        if (!string.IsNullOrWhiteSpace(RoleConfig.DisplayInfo))
         {
-            Player.RoleType = CustomRole.Spawnrole;
-            Player.MaxHealth = CustomRole.MaxHealth;
-            Player.Health = CustomRole.SpawnHealth;
-            if (CustomRole.GodMode)
-                Player.GodMode = true;
-            CustomRole.Inventory.Apply(Player);
+            _customInfo = new CustomInfoList.CustomInfoEntry()
+            {
+                Info = RoleConfig.DisplayInfo,
+                EveryoneCanSee = true
+            };
+            Player.CustomInfo.Add(_customInfo);   
+        }
+        if (RoleConfig.GodMode)
+            Player.GodMode = true;
 
-            if (!string.IsNullOrWhiteSpace(CustomRole.DisplayInfo))
-                Player.DisplayInfo = CustomRole.DisplayInfo.Replace("\\n","\n");
-            if (CustomRole.RemoveRoleName)
-                Player.RemoveDisplayInfo(PlayerInfoArea.Role);
-
-            if (!string.IsNullOrWhiteSpace(CustomRole.SpawnBroadcast))
-                Player.SendBroadcast(CustomRole.SpawnMessageTime, CustomRole.SpawnBroadcast.Replace("\\n", "\n"));
-
-            if (!string.IsNullOrWhiteSpace(CustomRole.SpawnHint))
-                Player.GiveTextHint(CustomRole.SpawnHint.Replace("\\n", "\n"), CustomRole.SpawnMessageTime);
-
-            if (!string.IsNullOrWhiteSpace(CustomRole.SpawnWindow))
-                Player.OpenReportWindow(CustomRole.SpawnWindow.Replace("\\n", "\n"));
+        if (RoleConfig.Human != null)
+        {
+            Player.WalkSpeed = RoleConfig.Human.WalkSpeed;
+            Player.SprintSpeed = RoleConfig.Human.SprintSpeed;
         }
 
-        public override void Escape()
-        {
-            if (CustomRole.EscapeRole > 0)
-                Player.RoleID = CustomRole.EscapeRole;
-        }
 
-        public override void DeSpawn()
+        if (!string.IsNullOrWhiteSpace(RoleConfig.SpawnBroadcast))
+            Player.SendBroadcast(RoleConfig.SpawnBroadcast.Replace("\\n", "\n"), RoleConfig.SpawnMessageTime);
+
+        if (!string.IsNullOrWhiteSpace(RoleConfig.SpawnHint))
+            Player.SendHint(RoleConfig.SpawnHint.Replace("\\n", "\n"), RoleConfig.SpawnMessageTime);
+
+        if (!string.IsNullOrWhiteSpace(RoleConfig.SpawnWindow))
+            Player.SendWindowMessage(RoleConfig.SpawnWindow.Replace("\\n", "\n"));
+
+        NeuronLogger.For<Synapse>().Warn("Found Advanced");
+        if (RoleConfig.Advanced != null)
         {
-            if (!string.IsNullOrWhiteSpace(CustomRole.DisplayInfo))
-                Player.DisplayInfo = string.Empty;
-            if (CustomRole.RemoveRoleName)
-                Player.AddDisplayInfo(PlayerInfoArea.Role);
-            if(CustomRole.GodMode)
-                Player.GodMode = false;
+            NeuronLogger.For<Synapse>().Warn("Found Advanced");
+            foreach (var command in RoleConfig.Advanced.CommandToExecuteAtSpawn ?? new())
+            {
+                NeuronLogger.For<Synapse>().Warn("Executed Command " + command);
+                _player.Host.ExecuteCommand(command.Replace("%player%", Player.PlayerId.ToString()));
+            }
+        }
+    }
+
+    protected override void OnDeSpawn(DeSpawnReason reason)
+    {
+        if (_customInfo != null)
+            Player.CustomInfo.Remove(_customInfo);
+        
+        if (RoleConfig.GodMode)
+            Player.GodMode = false;
+
+        if (RoleConfig.Human != null)
+        {
+            Player.WalkSpeed = _map.HumanWalkSpeed;
+            Player.SprintSpeed = _map.HumanSprintSpeed;
         }
     }
 }
