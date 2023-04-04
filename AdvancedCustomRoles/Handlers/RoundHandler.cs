@@ -1,28 +1,31 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using MEC;
+using Neuron.Core.Events;
+using Neuron.Core.Meta;
+using Ninject;
+using PlayerRoles.RoleAssign;
+using Synapse3.SynapseModule;
+using Synapse3.SynapseModule.Enums;
 using Synapse3.SynapseModule.Events;
 using Synapse3.SynapseModule.Player;
 using UnityEngine;
 
 namespace AdvancedCustomRoles.Handlers;
 
-public class RoundHandler
+[Automatic]
+public class RoundHandler : Listener
 {
-    private readonly AdvancedCustomRoles _plugin;
-
-    public RoundHandler(AdvancedCustomRoles plugin, RoundEvents roundEvents)
-    {
-        _plugin = plugin;
-
-        roundEvents.FirstSpawn.Subscribe(FirstSpawn);
-        roundEvents.SpawnTeam.Subscribe(Respawn);
-    }
+    [Inject]
+    public AdvancedCustomRoles Plugin { get; set; }
+    [Inject]
+    public PlayerService PlayerService { get; set; }
 
     public List<SynapsePlayer> RespawnPlayers { get; private set; } = new();
     public List<uint> SpawnedRoles { get; } = new();
 
-    private void Respawn(SpawnTeamEvent ev)
+    [EventHandler]
+    public void Respawn(SpawnTeamEvent ev)
     {
         RespawnPlayers = ev.Players.ToList();
         Timing.CallDelayed(0.3f, () =>
@@ -32,21 +35,28 @@ public class RoundHandler
         });
     }
 
-    private void FirstSpawn(FirstSpawnEvent ev)
+    [EventHandler]
+    public void FirstSpawn(FirstSpawnEvent ev)
     {
         var list = new List<uint>();
+        var players = PlayerService.GetPlayers(x => RoleAssigner.CheckPlayer(x.Hub) && !ev.PlayersBlockedFromSpawning.Contains(x), PlayerType.Player);
 
-        foreach (var role in _plugin.RoleHandler.CustomRoles)
+        foreach (var player in players.ToList())
         {
-            foreach (var spawn in ev.PlayerAndRoles.Where(x => role.RoundStartReplace.Keys.Contains(x.Value)).ToList())
+            foreach (var role in Plugin.RoleHandler.CustomRoles)
             {
-                //Before this Event it should be impossible to become and keep another Custom Role so we don't have to check the Amount of players with the Role currently
+                if (players.Count <= ev.AmountOfScpSpawns && !role.SpawnOneScpLessOnSpawn) continue;
                 if (role.MaxAmount >= 0 && list.Count(x => x == role.RoleId) >= role.MaxSpawnAmount) continue;
                 if (role.MaxSpawnAmount >= 0 && list.Count(x => x == role.RoleId) >= role.MaxSpawnAmount) continue;
+                if (Random.Range(1f, 100f) > role.SetPlayerAtRoundStartChance) continue;
 
-                if (Random.Range(1f, 100f) > role.RoundStartReplace[spawn.Value]) continue;
-                ev.PlayerAndRoles[spawn.Key] = role.RoleId;
                 list.Add(role.RoleId);
+                ev.PlayersBlockedFromSpawning.Add(player);
+                player.RoleID = role.RoleId;
+                if (role.SpawnOneScpLessOnSpawn)
+                    ev.AmountOfScpSpawns--;
+                players.Remove(player);
+                break;
             }
         }
     }

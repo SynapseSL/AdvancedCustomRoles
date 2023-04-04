@@ -1,7 +1,4 @@
 ﻿using System.Collections.Generic;
-using Neuron.Core.Logging;
-using Synapse3.SynapseModule;
-using Synapse3.SynapseModule.Map;
 using Synapse3.SynapseModule.Player;
 using Synapse3.SynapseModule.Role;
 
@@ -11,13 +8,11 @@ public class AdvancedRoleScript : SynapseAbstractRole
     public CustomRole RoleConfig;
     private CustomInfoList.CustomInfoEntry _customInfo;
     private readonly CustomRoleHandler _roleHandler;
-    private readonly MapService _map;
     private readonly PlayerService _player;
 
-    public AdvancedRoleScript(CustomRoleHandler roleHandler, MapService map, PlayerService player)
+    public AdvancedRoleScript(CustomRoleHandler roleHandler, PlayerService player)
     {
         _roleHandler = roleHandler;
-        _map = map;
         _player = player;
     }
         
@@ -29,7 +24,9 @@ public class AdvancedRoleScript : SynapseAbstractRole
     protected override IAbstractRoleConfig GetConfig() => RoleConfig;
     public override List<uint> GetEnemiesID() => RoleConfig.Enemies;
     public override List<uint> GetFriendsID() => RoleConfig.Friends;
-        
+
+    protected override bool CanSeeUnit(SynapsePlayer player) => RoleConfig.TeamsThatCanSeeUnit.Contains(player.TeamID);
+
     protected override void OnSpawn(IAbstractRoleConfig _)
     {
         if (!string.IsNullOrWhiteSpace(RoleConfig.DisplayInfo))
@@ -39,16 +36,10 @@ public class AdvancedRoleScript : SynapseAbstractRole
                 Info = RoleConfig.DisplayInfo,
                 EveryoneCanSee = true
             };
-            Player.CustomInfo.Add(_customInfo);   
+            Player.CustomInfo.Insert(1,_customInfo);   
         }
         if (RoleConfig.GodMode)
             Player.GodMode = true;
-
-        if (RoleConfig.Human != null)
-        {
-            Player.WalkSpeed = RoleConfig.Human.WalkSpeed;
-            Player.SprintSpeed = RoleConfig.Human.SprintSpeed;
-        }
 
 
         if (!string.IsNullOrWhiteSpace(RoleConfig.SpawnBroadcast))
@@ -59,15 +50,16 @@ public class AdvancedRoleScript : SynapseAbstractRole
 
         if (!string.IsNullOrWhiteSpace(RoleConfig.SpawnWindow))
             Player.SendWindowMessage(RoleConfig.SpawnWindow.Replace("\\n", "\n"));
-
-        NeuronLogger.For<Synapse>().Warn("Found Advanced");
+        
         if (RoleConfig.Advanced != null)
         {
-            NeuronLogger.For<Synapse>().Warn("Found Advanced");
             foreach (var command in RoleConfig.Advanced.CommandToExecuteAtSpawn ?? new())
             {
-                NeuronLogger.For<Synapse>().Warn("Executed Command " + command);
-                _player.Host.ExecuteCommand(command.Replace("%player%", Player.PlayerId.ToString()));
+                _player.Host.ExecuteCommand(command.Replace(new Dictionary<string, string>()
+                {
+                    { "%player%", Player.PlayerId.ToString() },
+                    { "%playername%", Player.NickName }
+                }));
             }
         }
     }
@@ -80,10 +72,16 @@ public class AdvancedRoleScript : SynapseAbstractRole
         if (RoleConfig.GodMode)
             Player.GodMode = false;
 
-        if (RoleConfig.Human != null)
+        if (RoleConfig.Advanced != null)
         {
-            Player.WalkSpeed = _map.HumanWalkSpeed;
-            Player.SprintSpeed = _map.HumanSprintSpeed;
+            foreach (var command in RoleConfig.Advanced.CommandToExecuteAtDeSpawn ?? new())
+            {
+                _player.Host.ExecuteCommand(command.Replace(new Dictionary<string, string>()
+                {
+                    { "%player%", Player.PlayerId.ToString() },
+                    { "%playername%", Player.NickName }
+                }));
+            }
         }
     }
 }

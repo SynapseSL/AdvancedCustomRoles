@@ -5,6 +5,7 @@ using System;
 using System.Text;
 using Neuron.Core;
 using Neuron.Core.Meta;
+using PlayerRoles;
 using Syml;
 using Synapse3.SynapseModule.Config;
 using Synapse3.SynapseModule.Map.Rooms;
@@ -54,7 +55,6 @@ public class CustomRoleHandler : InjectedLoggerBase
                 }
 
                 CustomRole role = null;
-                HumanConfig human = null;
                 ScpConfig scp = null;
                 AdvancedConfig advanced = null;
                 foreach (var documentSection in syml.Sections)
@@ -71,11 +71,7 @@ public class CustomRoleHandler : InjectedLoggerBase
                                 role = null;
                             }
                             break;
-                        
-                        case "human" when human == null:
-                            human = documentSection.Value.Export<HumanConfig>();
-                            break;
-                        
+
                         case "scp" when scp == null:
                             scp = documentSection.Value.Export<ScpConfig>();
                             break;
@@ -86,7 +82,6 @@ public class CustomRoleHandler : InjectedLoggerBase
                     }
                 }
                 if (role == null) continue;
-                role.Human = human;
                 role.Scp = scp;
                 role.Advanced = advanced;
                 
@@ -116,22 +111,17 @@ public class CustomRoleHandler : InjectedLoggerBase
             MaxHealth = 150,
             RoleId = 101,
             TeamId = 2,
-            RoundStartReplace = new()
-            {
-                { (uint)RoleType.ClassD, 100 }
-            },
+            SetPlayerAtRoundStartChance = 100,
             RespawnReplace = new()
             {
-                { (uint)RoleType.NtfCaptain, 100 }
+                { (uint)RoleTypeId.NtfCaptain, 100 }
             },
             Health = 100,
-            Role = RoleType.ClassD,
-            VisibleRole = RoleType.None,
-            Unit = "",
-            UnitId = 0,
+            Role = RoleTypeId.ClassD,
+            VisibleRole = RoleTypeId.None,
             ArtificialHealth = 0,
             MaxArtificialHealth = 75,
-            EscapeRole = 0,
+            EscapeRole = uint.MaxValue,
             PossibleInventories = new[]
             {
                 new SerializedPlayerInventory()
@@ -162,11 +152,6 @@ public class CustomRoleHandler : InjectedLoggerBase
             MaxSpawnAmount = 10,
             SpawnHint = "Hello"
         });
-        syml.Set("Human", new HumanConfig()
-        {
-            SprintSpeed = 2,
-            WalkSpeed = 2
-        });
         syml.Set("Scp",new ScpConfig()
         {
             ScpAttackDamage = 200
@@ -176,6 +161,10 @@ public class CustomRoleHandler : InjectedLoggerBase
             CommandToExecuteAtSpawn = new List<string>()
             {
                 "pbc %player% 5 Hello"
+            },
+            CommandToExecuteAtDeSpawn = new List<string>()
+            {
+                "pbc %player% %playername% you are now dead"
             }
         });
         var file = _neuronBase.RelativePath("CustomRoles", "ExampleRole.syml");

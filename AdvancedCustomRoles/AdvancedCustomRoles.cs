@@ -10,8 +10,9 @@ namespace AdvancedCustomRoles;
     Name = "AdvancedCustomRoles",
     Author = "Dimenzio",
     Description = "Allows to create new Role with just a few config files",
-    Version = "1.0.0"
+    Version = "3.0.0"
 )]
+[HeavyModded]
 public class AdvancedCustomRoles : ReloadablePlugin
 {
     public CustomRoleHandler RoleHandler { get; private set; }
@@ -21,12 +22,12 @@ public class AdvancedCustomRoles : ReloadablePlugin
 
     public override void EnablePlugin()
     {
-        RoleHandler = Synapse.GetAndBind<CustomRoleHandler>();
+        RoleHandler = Synapse.GetOrCreate<CustomRoleHandler>();
         RoleHandler.Load();
 
-        PlayerHandler = Synapse.GetAndBind<PlayerHandler>();
-        RoundHandler = Synapse.GetAndBind<RoundHandler>();
-        ScpHandler = Synapse.GetAndBind<ScpHandler>();
+        PlayerHandler = Synapse.GetOrCreate<PlayerHandler>();
+        RoundHandler = Synapse.GetOrCreate<RoundHandler>();
+        ScpHandler = Synapse.GetOrCreate<ScpHandler>();
         
         Logger.Info("AdvancedCustomRoles Loaded");
     }
