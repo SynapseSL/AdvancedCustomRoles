@@ -1,0 +1,145 @@
+[Role]
+name: ZoneManager
+roleId: 100
+teamId: 3
+enemies:
+- 0
+- 2
+- 4
+friends:
+- 1
+- 3
+role: FacilityGuard
+visibleRole: None
+ownRole: None
+escapeRole: 4
+health: 110
+maxHealth: 110
+artificialHealth: 0
+maxArtificialHealth: 75
+possibleSpawns:
+- roomName: Scp173
+  position:
+    x: -5.36
+    y: 0.97
+    z: 0.09
+  rotation:
+    x: 0
+    y: 180
+    z: 0
+- roomName: Scp330
+  position:
+    x: -4.39
+    y: 0.96
+    z: 1.92
+  rotation:
+    x: 0
+    y: 180
+    z: 0
+- roomName: LczCheckpointB
+  position:
+    x: -2.48
+    y: 0.96
+    z: -4.72
+  rotation:
+    x: 0
+    y: 180
+    z: 0
+- roomName: LczCheckpointA
+  position:
+    x: -2.48
+    y: 0.96
+    z: -3.09
+  rotation:
+    x: 0
+    y: 180
+    z: 0
+- roomName: LczOffice
+  position:
+    x: -5.47
+    y: 0.96
+    z: -3.1
+  rotation:
+    x: 0
+    y: 180
+    z: 0
+- roomName: LczOffice
+  position:
+    x: -5.47
+    y: 0.96
+    z: 3.1
+  rotation:
+    x: 0
+    y: 180
+    z: 0
+possibleInventories:
+- items:
+  - chance: 100
+    provideFully: true
+    iD: 3
+    durability: 0
+    weaponAttachments: 0
+    xSize: 1
+    ySize: 1
+    zSize: 1
+  - chance: 100
+    provideFully: true
+    iD: 14
+    durability: 0
+    weaponAttachments: 0
+    xSize: 1
+    ySize: 1
+    zSize: 1
+  - chance: 100
+    provideFully: true
+    iD: 36
+    durability: 0
+    weaponAttachments: 0
+    xSize: 1
+    ySize: 1
+    zSize: 1
+  - chance: 100
+    provideFully: true
+    iD: 34
+    durability: 0
+    weaponAttachments: 0
+    xSize: 1
+    ySize: 1
+    zSize: 1
+  - chance: 100
+    provideFully: true
+    iD: 34
+    durability: 0
+    weaponAttachments: 0
+    xSize: 1
+    ySize: 1
+    zSize: 1
+  ammo:
+    ammo5: 0
+    ammo7: 0
+    ammo9: 0
+    ammo12: 0
+    ammo44: 0
+customDisplay: true
+hierarchy: true
+useCustomUnitName: true
+customUnitName: 'Site Staff'
+teamsThatCanSeeUnit:
+- 1
+- 3
+scale:
+  x: 1
+  y: 1
+  z: 1
+godMode: false
+displayInfo: ''
+spawnMessageTime: 15
+spawnBroadcast: ''
+spawnHint: 'You are a <color=grey>ZoneManager</color>'
+spawnWindow: ''
+setPlayerAtRoundStartChance: 5
+spawnOneScpLessOnSpawn: false
+respawnReplace:
+maxSpawnAmount: 5
+maxRespawnAmount: 0
+maxAmount: 5

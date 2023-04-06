@@ -1,113 +1,113 @@
 # AdvancedCustomRoles
-This is a SCP:SL plugin for [Synapse](http://synapsesl.xyz) with which you can easily create new Roles with no coding knowledge.
+This is a SCP:SL plugin for [Synapse 3](http://synapsesl.xyz) with which you can easily create new Roles with no coding knowledge.
 
 ***
 
 ## Installation
-1. [Install Synapse](https://docs.synapsesl.xyz/setup/setup)
-2. Place the AdvancedCustomRoles.dll file that you can download [here](https://github.com/SynapseSL/AdvancedCustomRoles/releases) in your plugin directory
-3. Restart/Start your server.
+Download the latest version of this Plugin and unzip the file inside your SL Server Files
 
 ***
 
 # Create Custom Roles
 
-It is very easy to create new Roles. A Example file will be generated in `~/Synapse/configs/server-shared/customroles` that you can use as base to create a new Role.
+It is very easy to create new Roles. A Example file will be generated in `~/Synapse/CustomRoles` that you can use as base to create a new Role.
 
-If you need more Examples you can see some Example Roles [here](https://github.com/SynapseSL/AdvancedCustomRoles/tree/master/Example%20Roles)
+You can read our docs [here](https://docs3.synapsesl.xyz/resources) for Information about some Id's you need for configuring roles
 
-`Note: Every Role must have his own file inside the customroles folder.`
-
-### Inventory
+## Example Role
 ```yml
-inventory:
-  items:
-    # The chance that the player gets the Items
+[Role]
+name: ExampleRole
+#A unique id for this Role for plugins and commands to spawn this role
+roleId: 101
+#The team wh
+teamId: 2
+#A list of all enemies that must be defeated before the round can end
+enemies:
+- 0
+#A list of all teams that this role can't damage (ff configuration)
+friends:
+- 0
+#The Role which the Player will actually be set and will be used for internal server calculation
+role: ClassD
+#The Role which other Players will see. When None it uses role
+visibleRole: None
+#The Role which the Player itself will see. When None it uses role
+ownRole: None
+#The role the player will be assigned when he escapes
+escapeRole: 4294967295
+health: 100
+maxHealth: 150
+artificialHealth: 0
+maxArtificialHealth: 75
+#The spawn locations for this Role. Use the Roompoint command in game to get the values
+possibleSpawns:
+- roomName: Shelter
+  position:
+    x: 0
+    y: 2
+    z: 0
+  rotation:
+    x: 80
+    y: 180
+    z: 0
+#The Inventories the player can get
+possibleInventories:
+- items:
   - chance: 100
-    # If the prefered weapon attachments should be used
-    usePreferences: false
-    # The Id of the Item
-    iD: 0
-    durabillity: 0
+    provideFully: true
+    iD: 1
+    durability: 0
     weaponAttachments: 0
     xSize: 1
     ySize: 1
     zSize: 1
   ammo:
-    ammo5: 50
-    ammo7: 50
-    ammo9: 50
+    ammo5: 0
+    ammo7: 0
+    ammo9: 10
     ammo12: 0
     ammo44: 0
-```
-
-### Role Information
-```yml
-# The Name of the Role that other plugins use
-name: ExampleRole
-# The ID of the Role (you can set your class with setclass {playerid} {Roleid})
-roleID: 25
-# The Team of the Role (see https://docs.synapsesl.xyz/resources#teams). You can also use your own IDs to create a own Team
-teamID: 0
-# The Team IDs of the enemies that must be defeated or else the round can't end
-enemies:
-- 0
-# The Team IDs that the role can't hurt
-friends:
-- 0
-```
-
-### Display
-```yml
-# The skin that the role use (https://docs.synapsesl.xyz/resources#roles)
-spawnrole: ClassD
-# The Role the Player will become after Escaping
-# -1 is None
-escapeRole: -1
-# The amount of Health the Role spawns with
-spawnHealth: 100
-# The max amount of Health the Role can have
-maxHealth: 100
-# The Text that should be displayed when looking at the player of this Role
-displayInfo: <color=green>Example</color>
-# If the Role name should be removed. For Example Class-D, which can be usefull in combination with displaInfo
-removeRoleName: true
-```
-
-### SpawnMessage
-```yml
-# The amount of Time the Broadcast/Hint should be displayed
+#When enabled will a Custom Display generated that shows the Custom Role Name instead of the vanilla one
+customDisplay: true
+#When enabled the Role will display it's unit in the custom display
+hierarchy: false
+#When enabled will the unit in the Custom Display be a custom one
+useCustomUnitName: false
+#See above
+customUnitName: ''
+#A list of teams that can see the unit
+teamsThatCanSeeUnit: []
+scale:
+  x: 1
+  y: 1
+  z: 1
+godMode: false
+#Additional Info that will be added to the Display
+displayInfo: Test
 spawnMessageTime: 5
-# The Broadcast that should be displayed
 spawnBroadcast: ''
-# The Hint that should be displayed
-spawnHint: ''
-# The content of the Window that appear when spawning
+spawnHint: Hello
 spawnWindow: ''
-```
+#The chance for each player that he will spawn as this role
+setPlayerAtRoundStartChance: 0
+#When enabled will one Scp spawn less upon this role being spawned
+spawnOneScpLessOnSpawn: false
+# left side the Role Id and Right side the chance
+# this will replace the role on the left upon Respawn
+respawnReplace:
+  12: 0
+maxSpawnAmount: 10
+maxRespawnAmount: 10
+maxAmount: 5
 
-## Spawn
-```yml
-# The locations where the role can spawn (remove it for default spawns)
-spawns:
-- room: EZ_Shelter
-  x: 0
-  y: 2
-  z: 0
-- room: EZ_Shelter
-  x: 2
-  y: 2
-  z: 0
-# This replace a Role at the start of the Round with the Custom Role
-# The first value (here 0 which would be SCP-173) is the Role that is going to be replaced and the second value is the chance that the role will be replaced with the custom one
-roundStartReplace:
-  0: 100
-# The same than roundStartReplace except with a Team respawn.(Chaos / MTF Respawn)
-respawnReplace: ::lsb::::rsb::
-# The max amount of this custom role that can spawn at the beginning of the round
-maxSpawnAmount: -1
-# The max amount of this custom role that can respawn in one respawn
-maxRespawnAmount: -1
-# The max Amount of this role that can ever exist (you can still forceclass yourself to the role)
-maxAmount: -1
+[Scp]
+scpAttackDamage: 200
+scp106TakeIntoPocket: true
+
+[Advanced]
+commandToExecuteAtSpawn:
+- pbc %player% 5 Hello
+commandToExecuteAtDeSpawn:
+- pbc %player% %playername% you are now dead
 ```
