@@ -49,16 +49,4 @@ public class PlayerHandler : Listener
             }
         }
     }
-
-    [EventHandler]
-    public void KeyPress(KeyPressEvent ev)
-    {
-        if (ev.KeyCode == KeyCode.Alpha1)
-        {
-            new SynapseDummy(ev.Player.Position, ev.Player.Rotation, RoleTypeId.ClassD, "testdummy")
-            {
-                RaVisible = true
-            };
-        }
-    }
 }
