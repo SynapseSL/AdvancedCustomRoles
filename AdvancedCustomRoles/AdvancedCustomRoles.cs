@@ -1,5 +1,4 @@
-﻿
-using AdvancedCustomRoles.Handlers;
+﻿using AdvancedCustomRoles.Handlers;
 using Neuron.Core.Plugins;
 using Synapse3.SynapseModule;
 using Synapse3.SynapseModule.Events;

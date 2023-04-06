@@ -111,10 +111,10 @@ public class CustomRoleHandler : InjectedLoggerBase
             MaxHealth = 150,
             RoleId = 101,
             TeamId = 2,
-            SetPlayerAtRoundStartChance = 100,
+            SetPlayerAtRoundStartChance = 0,
             RespawnReplace = new()
             {
-                { (uint)RoleTypeId.NtfCaptain, 100 }
+                { (uint)RoleTypeId.NtfCaptain, 0 }
             },
             Health = 100,
             Role = RoleTypeId.ClassD,

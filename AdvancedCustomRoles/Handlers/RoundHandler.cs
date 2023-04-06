@@ -5,7 +5,6 @@ using Neuron.Core.Events;
 using Neuron.Core.Meta;
 using Ninject;
 using PlayerRoles.RoleAssign;
-using Synapse3.SynapseModule;
 using Synapse3.SynapseModule.Enums;
 using Synapse3.SynapseModule.Events;
 using Synapse3.SynapseModule.Player;
