@@ -20,7 +20,7 @@ You can read our docs [here](https://docs3.synapsesl.xyz/resources) for Informat
 name: ExampleRole
 #A unique id for this Role for plugins and commands to spawn this role
 roleId: 101
-#The team wh
+#The team in which the role should be (used for Friendly Fire)
 teamId: 2
 #A list of all enemies that must be defeated before the round can end
 enemies:
